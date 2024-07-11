@@ -1,4 +1,4 @@
-# VGA-communication-protocol
+# VGA
 ## Phases:
 ### RTL Design. 
 ### Verification of RTL code using Systemverilog Assertions.
