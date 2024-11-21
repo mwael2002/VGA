@@ -1,14 +1,13 @@
 module counter #(parameter  h_width=10,v_width=10,h_sync_count=640,v_sync_count=480,
-                            right_border=16,left_border=47,
-                            top_border=32,bottom_border=10,
-                            h_retrace=96,v_retrace=2 ,
-                            h_max=h_sync_count+right_border+left_border+h_retrace,
-                            v_max=v_sync_count+top_border+bottom_border+v_retrace
-                          )(
+                            right_border=16,left_border=47,top_border=32,bottom_border=10,
+                            h_retrace=96,v_retrace=2)(
     input  clk,rst_n,
     output reg[v_width-1:0]v_count,
     output reg[h_width-1:0]h_count
 );
+
+
+localparam  h_max=h_sync_count+right_border+left_border+h_retrace,v_max=v_sync_count+top_border+bottom_border+v_retrace;
 
 wire v_flag,h_flag;
 

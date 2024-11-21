@@ -1,10 +1,5 @@
 module synchronizer #(parameter h_width=10,v_width=10,h_sync_count=640,v_sync_count=480,
-                                right_border=16,left_border=47,
-                                top_border=32,bottom_border=10,
-                                h_retrace=96,v_retrace=2 ,
-                                h_max=h_sync_count+right_border+left_border+h_retrace,
-                                v_max=v_sync_count+top_border+bottom_border+v_retrace
-                          )
+					right_border=16,left_border=47,top_border=32,bottom_border=10,h_retrace=96,v_retrace=2)
 (
     input clk,rst_n,
     input   [v_width-1:0]v_count,
@@ -12,12 +7,14 @@ module synchronizer #(parameter h_width=10,v_width=10,h_sync_count=640,v_sync_co
     output  reg h_sync,v_sync,video_on  
 );
 
+localparam  h_max=h_sync_count+right_border+left_border+h_retrace,v_max=v_sync_count+top_border+bottom_border+v_retrace;
+
 always@(posedge clk or negedge rst_n) begin
     
     if(!rst_n)
     h_sync<=0;
     
-    else if( (h_count>(left_border+h_sync_count+right_border) && h_count<=(left_border+h_sync_count+right_border+h_retrace) ) )
+    else if( (h_count>(h_max-h_retrace) && h_count<=(h_max) ) )
     h_sync<=0;
     
     else
@@ -30,7 +27,7 @@ always@(posedge clk or negedge rst_n) begin
     if(!rst_n)
     v_sync<=0;
     
-    else if( (v_count>(top_border+v_sync_count+bottom_border) && v_count<=(top_border+v_sync_count+bottom_border+v_retrace)) )
+    else if( (v_count>(v_max-v_retrace) && v_count<=(v_max)) )
     v_sync<=0;
     
     else
