@@ -12,11 +12,6 @@ wire clk_out;
 
 assign rgb_data=(video_on)?data_in:0;
 
-    Gowin_rPLL PLL0(
-        .clkout(clk_out), //output clkout
-        .clkin(clk) //input clkin
-    ); 
-
 counter #(.h_width(h_width),.v_width(v_width)) counter_0(
 .clk(clk),
 .rst_n(rst_n),
